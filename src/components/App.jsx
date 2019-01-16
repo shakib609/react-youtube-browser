@@ -8,7 +8,7 @@ import 'bulma/css/bulma.min.css'
 
 export default class App extends React.Component {
   state = {
-    selectedVideoId: '',
+    selectedVideoId: {},
     videos: []
   }
 
@@ -20,7 +20,7 @@ export default class App extends React.Component {
     })
     this.setState({
       videos: response.data.items,
-      selectedVideoId: response.data.items[0].id.videoId
+      selectedVideoId: response.data.items[0]
     })
   }
 
@@ -30,10 +30,13 @@ export default class App extends React.Component {
     return <div className='container'>
       <div className='column'>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <div className='columns' style={{ display: videoCount > 0 ? 'flex' : 'none' }}>
-          <VideoList videos={this.state.videos} />
-          <VideoPlayer videoId={this.state.selectedVideoId} />
-        </div>
+        {
+          videoCount > 0 &&
+          <div className='columns'>
+            <VideoList videos={this.state.videos} />
+            <VideoPlayer video={this.state.selectedVideoId} />
+          </div>
+        }
       </div>
     </div>
   }
