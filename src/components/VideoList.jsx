@@ -10,9 +10,11 @@ export default class VideoList extends React.Component {
           video={video} />
       </div>
     })
-    return <div className='box column is-4' style={{ marginBottom: '30px' }}>
-      <h3 className='has-text-centered'><b>Search Results</b></h3>
-      {searchResults}
+    return <div className='column is-4'>
+      <div className='box'>
+        <h3 className='has-text-centered'><b>Search Results</b></h3>
+        {searchResults}
+      </div>
     </div>
   }
 }
