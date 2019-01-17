@@ -5,7 +5,10 @@ import VideoCard from './VideoCard'
 export default class VideoList extends React.Component {
   render () {
     const searchResults = this.props.videos.map(video => {
-      return <div onClick={e => console.log(video.id.videoId)} key={video.id.videoId}>
+      return <div
+        onClick={e => this.props.onClick(video)}
+        key={video.id.videoId}
+        style={{ cursor: 'pointer' }}>
         <VideoCard
           video={video} />
       </div>
@@ -20,5 +23,6 @@ export default class VideoList extends React.Component {
 }
 
 VideoList.propTypes = {
-  videos: PropTypes.array.isRequired
+  videos: PropTypes.array.isRequired,
+  onClick: PropTypes.func
 }

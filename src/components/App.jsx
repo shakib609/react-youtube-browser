@@ -8,7 +8,7 @@ import 'bulma/css/bulma.min.css'
 
 export default class App extends React.Component {
   state = {
-    selectedVideoId: {},
+    selectedVideo: {},
     videos: []
   }
 
@@ -20,8 +20,12 @@ export default class App extends React.Component {
     })
     this.setState({
       videos: response.data.items,
-      selectedVideoId: response.data.items[0]
+      selectedVideo: response.data.items[0]
     })
+  }
+
+  onVideoClick = video => {
+    this.setState({ selectedVideo: video })
   }
 
   render () {
@@ -33,8 +37,9 @@ export default class App extends React.Component {
         {
           videoCount > 0 &&
           <div className='columns'>
-            <VideoList videos={this.state.videos} />
-            <VideoPlayer video={this.state.selectedVideoId} />
+            <VideoPlayer video={this.state.selectedVideo} />
+            <VideoList videos={this.state.videos}
+              onClick={this.onVideoClick} />
           </div>
         }
       </div>
